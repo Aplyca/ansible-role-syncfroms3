@@ -27,7 +27,8 @@ dependencies:
   - { role: aplyca.Syncfroms3 }
 ```
 
-## Ask for confirmation
+Ask for confirmation
+--------------------
 This is a risky tasks so the role ask for a variable `confirmation`, you can add the confirmation in the playbook, like this: 
 
 ```yaml
