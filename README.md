@@ -3,9 +3,6 @@ Ansible Role Sync From S3
 
 An Ansible role that sync app content from S3
 
-[![Build Status](https://travis-ci.org/Aplyca/ansible-role-syncfroms3.svg?branch=master)](https://travis-ci.org/Aplyca/ansible-role-syncfroms3)
-[![Circle CI](https://circleci.com/gh/Aplyca/ansible-role-syncfroms3.svg?style=svg)](https://circleci.com/gh/Aplyca/ansible-role-syncfroms3)
-
 Ansible Role that sync content from S3 on Debian/Ubuntu.
 
 Requirements
@@ -30,7 +27,7 @@ dependencies:
   - { role: aplyca.Syncfroms3 }
 ```
 
-# Ask for confirmation
+## Ask for confirmation
 This is a risky tasks so the role ask for a variable `confirmation`, you can add the confirmation in the playbook, like this: 
 
 ```yaml
