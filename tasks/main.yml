@@ -1,0 +1,38 @@
+---
+- name: Fail the play if not confirmation
+  fail: msg="Not confirmed"
+  when: confirmation != 'y'
+
+- name: Downloading content
+  shell: "aws s3 sync s3://{{ froms3['storage']['bucket'] }} . --profile {{ froms3['storage']['profile'] }}"
+  args:
+    chdir: "{{ froms3['storage']['dir'] }}"
+
+- name: Uncompress the DB
+  unarchive:
+    src: "{{ froms3['storage']['dir'] }}/{{ froms3['database']['dir'] }}/{{ froms3['database']['name'] }}.sql.tar.gz"
+    dest: /tmp
+    copy: no
+
+- name: DB replacements
+  replace:
+    dest: "/tmp/{{ froms3['database']['name'] }}.sql"
+    regexp: "{{ item.regex }}"
+    replace: "{{ item.replace }}"
+  with_items: froms3['database']['replacements']
+
+- name: Import DB
+  sudo: yes
+  mysql_db:
+    name: "{{ froms3['database']['name'] }}"
+    state: import
+    target: "/tmp/{{ froms3['database']['name'] }}.sql"
+
+- name: Delete DB File
+  file:
+    path: "/tmp/{{ froms3['database']['name'] }}.sql"
+    state: absent
+
+- name: Execute post commands, please wait ...
+  shell: "{{ item }}"
+  with_items: froms3['post_commands']
