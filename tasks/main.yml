@@ -1,4 +1,7 @@
 ---
+- name: "The sync process will be executed with the following varaibles:"
+  debug: var=froms3
+
 - name: Fail the play if not confirmation
   fail: msg="Not confirmed"
   when: confirmation != 'y'
