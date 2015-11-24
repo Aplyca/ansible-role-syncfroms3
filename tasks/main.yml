@@ -1,11 +1,4 @@
 ---
-- name: "The sync process will be executed with the following varaibles:"
-  debug: var=froms3
-
-- name: Fail the play if not confirmation
-  fail: msg="Not confirmed"
-  when: confirmation != 'y'
-
 - name: Downloading content
   shell: "aws s3 sync s3://{{ froms3['storage']['bucket'] }} . --profile {{ froms3['storage']['profile'] }}"
   args:
