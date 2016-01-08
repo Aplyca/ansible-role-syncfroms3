@@ -1,5 +1,7 @@
-Ansible Role Sync From S3
-====================
+DEPRECATED Ansible Role Sync From S3
+====================================
+
+Use https://github.com/Aplyca/ansible-role-syncs3content instead
 
 An Ansible role that sync app content from S3
 
